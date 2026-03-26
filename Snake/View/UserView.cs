@@ -8,5 +8,6 @@ namespace Snake.View
 {
     internal class UserView
     {
+
     }
 }

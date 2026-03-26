@@ -8,5 +8,6 @@ namespace Snake.Controller
 {
     internal class UserController
     {
+
     }
 }

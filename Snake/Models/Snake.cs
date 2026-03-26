@@ -8,5 +8,9 @@ namespace Snake.Models
 {
     internal class Snake
     {
+        public int HeadX { get; set; }
+        public int HeadY { get; set; }
+
+        
     }
 }
