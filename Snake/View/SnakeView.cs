@@ -11,12 +11,12 @@ namespace Snake.View
     {
         public SnakeView() { }
 
-        public SnakeView(int[,] map)
+        public SnakeView(int[,,] map)
         {
             Map = map;
         }
 
-        public int[,] Map = new int[20, 20];
+        public int[,,] Map = new int[20, 20, 20];
 
         public void DisplayMap()
         {
@@ -24,7 +24,7 @@ namespace Snake.View
             {
                 for (int j = 0; j < 20; j++)
                 {
-                    Console.Write(Map[i, j] + " | ");
+                    Console.Write(Map[i, j, 0] + " | ");
                 }
                 Console.WriteLine();
             }

@@ -8,6 +8,6 @@ namespace Snake.Models
 {
     internal class Snake
     {
-
+        public int[,] Positions { get; set; }
     }
 }
