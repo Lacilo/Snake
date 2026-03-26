@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Snake.Models
 {
-    internal class Snake
+    internal class SnakePos
     {
-        public int[,] Positions { get; set; }
+        public List<Pos> Positions { get; set; }
     }
 }

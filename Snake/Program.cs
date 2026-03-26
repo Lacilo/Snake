@@ -10,7 +10,11 @@ namespace MyApp
         static void Main(string[] args)
         {
             SnakeView view = new SnakeView();
+            SnakePos snake = new SnakePos() {
+                Positions = new List<Pos> { new Pos(0, 0), new Pos(1, 0), new Pos(2, 0), new Pos(3, 0), new Pos(4, 0)}
+            };
 
+            view.InsertSnakeIntoMap(snake);
             view.DisplayMap();
         }
     }
