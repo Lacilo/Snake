@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Models
+namespace Snake.View
 {
-    internal class Snake
+    internal class LoginView
     {
-
     }
 }
