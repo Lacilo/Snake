@@ -38,6 +38,33 @@ namespace Snake.View
             }
         }
 
-        
+        static void BejelentkezesView()
+        {
+            bool b = true;
+            while (b)
+            {
+                Console.Clear();
+                Console.WriteLine("=== BEJELENTKEZÉS ===");
+
+                Console.WriteLine("Felhasználónév: ");
+                string userName = Console.ReadLine();
+
+                Console.WriteLine("Jelszó: ");
+                string password = Console.ReadLine();
+
+                bool sucLogin = new UserController().IsLoginTrueOrFalse(userName, password);
+                if (sucLogin)
+                {
+                    Console.WriteLine("Sikeres bejelentkezés!");
+                    Console.ReadLine();
+                    b = false; 
+                }
+                else
+                {
+                    Console.WriteLine("Hibás felhasználónév vagy jelszó!");
+                    Console.ReadLine();
+                }  
+            }
+        }
     }
 }
