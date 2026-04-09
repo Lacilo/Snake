@@ -41,6 +41,29 @@ namespace Snake.Controller
             }
         }
 
+        public bool NewRegistration(string nev, string jelszo)
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=;database=snake;");
+                con.Open();
+                string insertSql = @"INSERT INTO bejelentkezes VALUES (@FelhNev,@Jelszo)";
+                MySqlCommand insertcmd = new MySqlCommand(insertSql, con);
+                insertcmd.Parameters.AddWithValue("@FelhNev", nev);
+                insertcmd.Parameters.AddWithValue("@Jelszo", jelszo);
+
+
+                int sorok = insertcmd.ExecuteNonQuery();
+                bool valasz = sorok > 0 ? true : false;
+                return valasz;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         
     }
 }
