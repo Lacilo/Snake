@@ -64,6 +64,17 @@ namespace Snake.Controller
             }
         }
 
-        
+        public bool IsLoginTrueOrFalse(string name, string password)
+        {
+            var logins = GetLoginList();
+            foreach (var login in logins)
+            {
+                if (login.UserName == name && login.Password == password)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
