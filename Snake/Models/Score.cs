@@ -1,14 +1,12 @@
-﻿using MySql.Data.MySqlClient;
-using Snake.Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.View
+namespace Snake.Models
 {
-    internal class LoginView
+    internal class Score
     {
         
     }
