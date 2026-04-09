@@ -9,5 +9,17 @@ namespace Snake.Models
     internal class Score
     {
         
+        public Score(){ }
+
+        public Score(int id, int playerScore, DateTime scoreDate)
+        {
+            Id = id;
+            PlayerScore = playerScore;
+            ScoreDate = scoreDate;
+        }
+
+        public int Id { get; set; }
+        public int PlayerScore { get; set; }
+        public DateTime ScoreDate { get; set; }
     }
 }
