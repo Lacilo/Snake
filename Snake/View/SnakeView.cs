@@ -20,6 +20,38 @@ namespace Snake.View
 
         public int[,] Map;
 
+        public void DisplayMapFlicker(int score)
+        {
+            for (int i = 0; i < Map.GetLength(0); i++)
+            {
+                for (int j = 0; j < Map.GetLength(1); j++)
+                {
+                    if (Map[i, j] == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("█");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else if (Map[i, j] == 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("█");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else if (Map[i, j] == 0)
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.Write("|\n");
+            }
+            for (int i = 0; i < Map.GetLength(1); i++)
+            {
+                Console.Write('-');
+            }
+            Console.WriteLine("\nPontszám: " + score);
+        }
+
         public void DisplayMap(int score)
         {
             for (int i = 0; i < Map.GetLength(0); i++)
@@ -43,9 +75,13 @@ namespace Snake.View
                         Console.Write(" ");
                     }
                 }
-                Console.WriteLine();
+                Console.Write("|\n");
             }
-            Console.WriteLine("Pontszám: " + score);
+            for (int i = 0; i < Map.GetLength(1); i++)
+            {
+                Console.Write('-');
+            }
+            Console.WriteLine("\nPontszám: " + score);
         }
 
         public void InsertSnakeIntoMap(SnakePos sPos)

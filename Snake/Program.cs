@@ -27,7 +27,7 @@ namespace MyApp
 
                         Console.WriteLine("A játékhoz - 1");
                         Console.WriteLine("Az eredményekhez - 2");
-                        Console.WriteLine("A kilépéshez - 3\n\nKérem válasszon --> ");
+                        Console.Write("A kilépéshez - 3\n\nKérem válasszon --> ");
                         string valasztas = Console.ReadLine();
 
                             if (valasztas == "1")
