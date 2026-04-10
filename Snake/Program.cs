@@ -27,7 +27,7 @@ namespace MyApp
 
                         Console.WriteLine("A játékhoz - 1");
                         Console.WriteLine("Az eredményekhez - 2");
-                        Console.WriteLine("A kilépéshez - 3");
+                        Console.WriteLine("A kilépéshez - 3\n\nKérem válasszon --> ");
                         string valasztas = Console.ReadLine();
 
                             if (valasztas == "1")
@@ -40,6 +40,10 @@ namespace MyApp
                     else
                     {
                         // Bejelentkezés/regisztráció
+                        Console.WriteLine("Bejelentkezés - 1 ");
+                        Console.WriteLine("Regisztráció - 2");
+
+                        Console.ReadLine();
                     }
                 }
                 catch (IndexOutOfRangeException iorEx)
