@@ -52,7 +52,7 @@ namespace Snake.View
             //Console.WriteLine("\nPontszám: " + score);
         }
 
-        public void HighlihtSnakeHead(SnakePos snake)
+        public void HighlihtSnakeHead(SnakePos snake, ConsoleColor color = ConsoleColor.Green)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(snake.Positions.Last().X, snake.Positions.Last().Y);
@@ -79,7 +79,7 @@ namespace Snake.View
             Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
         }
 
-        public void DisplayWholeSnake(SnakePos snake, Pos currentFruitPos)
+        public void DisplayWholeSnake(SnakePos snake, Pos currentFruitPos, int mapHeight)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             foreach (var item in snake.Positions)
@@ -96,6 +96,9 @@ namespace Snake.View
             Console.Write("■");
 
             Console.ForegroundColor = ConsoleColor.White;
+
+            Console.SetCursorPosition(0, mapHeight);
+            Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
         }
 
         public void DisplayMap(int score)

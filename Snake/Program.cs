@@ -24,6 +24,7 @@ namespace MyApp
                         SnakeView view;
                         SnakePos snake;
                         Pos currentFruitPos;
+                        
 
                         Console.Clear();
                         Console.WriteLine("A játékhoz - 1");
@@ -68,7 +69,7 @@ namespace MyApp
         }
 
         private static Pos GameLoop(FruitController fruitController, SnakeView view, SnakePos snake, Pos currentFruitPos)
-        {
+        { 
             Console.Clear();
             view.InsertSnakeIntoMap(snake);
             view.InsertNewFruitIntoMap(currentFruitPos);
@@ -119,9 +120,10 @@ namespace MyApp
                 view.InsertSnakeIntoMap(snake);
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
-                //view.DisplayMapElements(snake, currentFruitPos, view.Map.GetLength(0) + 2);
-                view.DisplayWholeSnake(snake, currentFruitPos);
+                view.DisplayWholeSnake(snake, currentFruitPos, view.Map.GetLength(0) + 2);
                 view.HighlihtSnakeHead(snake);
+
+                
                 //view.DisplayMap(snake.Positions.Count);
 
                 Thread.Sleep(150);

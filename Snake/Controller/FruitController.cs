@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Snake.Models;
+using Snake.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
