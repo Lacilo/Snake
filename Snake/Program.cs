@@ -8,6 +8,8 @@ namespace MyApp
 {
     internal class Program
     {
+        static Login currentUser;
+
         static void Main(string[] args)
         {
             Console.Clear();
@@ -16,21 +18,28 @@ namespace MyApp
             {
                 try
                 {
-                    FruitController fruitController;
-                    SnakeView view;
-                    SnakePos snake;
-                    Pos currentFruitPos;
-
-                    Console.WriteLine("A játékhoz - 1");
-                    Console.WriteLine("Az eredményekhez - 2");
-                    Console.WriteLine("A kilépéshez - 3");
-                    string valasztas = Console.ReadLine();
-
-                    if (valasztas == "1") 
+                    if(currentUser != null)
                     {
-                        Console.Clear();
-                        InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
-                        currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
+                        FruitController fruitController;
+                        SnakeView view;
+                        SnakePos snake;
+                        Pos currentFruitPos;
+
+                        Console.WriteLine("A játékhoz - 1");
+                        Console.WriteLine("Az eredményekhez - 2");
+                        Console.WriteLine("A kilépéshez - 3");
+                        string valasztas = Console.ReadLine();
+
+                            if (valasztas == "1")
+                            {
+                                Console.Clear();
+                                InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
+                                currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
+                            }
+                    }
+                    else
+                    {
+                        // Bejelentkezés/regisztráció
                     }
                 }
                 catch (IndexOutOfRangeException iorEx)
