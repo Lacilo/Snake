@@ -114,8 +114,9 @@ namespace MyApp
                 view.InsertSnakeIntoMap(snake);
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
-                Console.Clear();
-                view.DisplayMap(snake.Positions.Count);
+                //Console.Clear();
+                view.DisplayMapElements(snake, currentFruitPos, view.Map.GetLength(0) + 2);
+                //view.DisplayMap(snake.Positions.Count);
 
                 Thread.Sleep(150);
             }

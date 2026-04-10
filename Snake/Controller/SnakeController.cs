@@ -38,7 +38,7 @@ namespace Snake.Controller
                 case 'w':
                     snake.Positions.Add(new Pos(snake.Positions.Last().X, snake.Positions.Last().Y - 1));
                     //Console.WriteLine("Hosszabbítottam a kígyót - w");
-                    snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
+                    //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
 
                     break;
 
@@ -47,7 +47,7 @@ namespace Snake.Controller
 
                     snake.Positions.Add(new Pos(snake.Positions.Last().X, snake.Positions.Last().Y + 1));
                     //Console.WriteLine("Hosszabbítottam a kígyót - s");
-                    snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
+                    //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
 
                     break;
 
@@ -56,7 +56,7 @@ namespace Snake.Controller
 
                     snake.Positions.Add(new Pos(snake.Positions.Last().X - 1, snake.Positions.Last().Y));
                     //Console.WriteLine("Hosszabbítottam a kígyót - a");
-                    snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
+                    //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
 
                     break;
 
@@ -65,7 +65,7 @@ namespace Snake.Controller
 
                     snake.Positions.Add(new Pos(snake.Positions.Last().X + 1, snake.Positions.Last().Y));
                     //Console.WriteLine("Hosszabbítottam a kígyót - d");
-                    snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
+                    //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
 
                     break;
             }

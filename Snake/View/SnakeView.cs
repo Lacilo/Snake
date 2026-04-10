@@ -49,7 +49,26 @@ namespace Snake.View
             {
                 Console.Write('-');
             }
-            Console.WriteLine("\nPontszám: " + score);
+            //Console.WriteLine("\nPontszám: " + score);
+        }
+
+        public void DisplayMapElements(SnakePos snake, Pos currentFruitPos, int mapHeight)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(snake.Positions.Last().X, snake.Positions.Last().Y);
+            Console.Write("█");
+
+            Console.SetCursorPosition(snake.Positions[0].X, snake.Positions[0].Y);
+            Console.Write(" ");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(currentFruitPos.X, currentFruitPos.Y);
+            Console.Write("■");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.SetCursorPosition(0, mapHeight);
+            Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
         }
 
         public void DisplayMap(int score)
@@ -81,7 +100,7 @@ namespace Snake.View
             {
                 Console.Write('-');
             }
-            Console.WriteLine("\nPontszám: " + score);
+            Console.WriteLine("\n\nPontszám: " + score);
         }
 
         public void InsertSnakeIntoMap(SnakePos sPos)
