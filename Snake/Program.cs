@@ -10,8 +10,6 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-
-
             Console.Clear();
 
             while(true)
