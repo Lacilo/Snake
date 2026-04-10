@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -25,7 +26,18 @@ namespace Snake.View
             {
                 for (int j = 0; j < Map.GetLength(1); j++)
                 {
-                    Console.Write(Map[i, j] + " ");
+                    if (Map[i, j] == 1)
+                    {
+                        Console.Write(Map[i, j]);
+                    }
+                    else if (Map[i, j] == 2)
+                    {
+                        Console.Write(Map[i, j]);
+                    }
+                    else if(Map[i, j] == 0)
+                    {
+                        Console.Write(" ");
+                    }
                 }
                 Console.WriteLine();
             }

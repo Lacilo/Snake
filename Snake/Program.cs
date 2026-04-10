@@ -18,7 +18,7 @@ namespace MyApp
             {
                 try
                 {
-                    if(currentUser != null)
+                    if(!(currentUser != null))
                     {
                         FruitController fruitController;
                         SnakeView view;
@@ -69,9 +69,31 @@ namespace MyApp
             view.InsertNewFruitIntoMap(currentFruitPos);
             view.DisplayMap();
 
+            char dir = 'd';
+
             while (true)
-            {
-                char dir = Console.ReadKey().KeyChar;
+            {      
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true).Key;
+
+                    switch (key)
+                    {
+                        case ConsoleKey.W:
+                            dir = 'w';
+                            break;
+                        case ConsoleKey.A:
+                            dir = 'a';
+                            break;
+                        case ConsoleKey.S:
+                            dir = 's';
+                            break;
+                        case ConsoleKey.D:
+                            dir = 'd';
+                            break;
+                    }
+                }
+
                 SnakeController.AppendSnake(snake, dir, currentFruitPos);
 
                 if (fruitController.IsEaten(snake, currentFruitPos, dir))
@@ -94,6 +116,8 @@ namespace MyApp
 
                 Console.Clear();
                 view.DisplayMap();
+
+                Thread.Sleep(150);
             }
 
             return currentFruitPos;
@@ -105,6 +129,8 @@ namespace MyApp
             string inp = Console.ReadLine();
             string[] inpSplit = inp.Split(',');
 
+            //Console.SetWindowSize(int.Parse(inpSplit[1]), int.Parse(inpSplit[0]));
+            //Console.SetBufferSize(int.Parse(inpSplit[1]), int.Parse(inpSplit[0]));
 
             fruitController = new FruitController();
             view = new SnakeView(new int[int.Parse(inpSplit[1]), int.Parse(inpSplit[0])]);
