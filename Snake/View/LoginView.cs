@@ -10,7 +10,7 @@ namespace Snake.View
 {
     internal class LoginView
     {
-        static void RegistrationView()
+        public static void RegistrationView()
         {
             bool b = true;
             while (b)
@@ -26,7 +26,7 @@ namespace Snake.View
 
                 try
                 {
-                    new UserController().NewRegistration(felhNev,jelszo);
+                    new UserController().NewRegistration(felhNev, jelszo);
                     Console.WriteLine("Sikeres regisztráció!");
                     Console.ReadLine();
                     b = false;
@@ -34,11 +34,11 @@ namespace Snake.View
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                }        
+                }
             }
         }
 
-        static void BejelentkezesView()
+        public static void BejelentkezesView()
         {
             bool b = true;
             while (b)
@@ -57,13 +57,13 @@ namespace Snake.View
                 {
                     Console.WriteLine("Sikeres bejelentkezés!");
                     Console.ReadLine();
-                    b = false; 
+                    b = false;
                 }
                 else
                 {
                     Console.WriteLine("Hibás felhasználónév vagy jelszó!");
                     Console.ReadLine();
-                }  
+                }
             }
         }
     }
