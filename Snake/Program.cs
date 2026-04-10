@@ -10,6 +10,8 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
+
+
             Console.Clear();
 
             while(true)
@@ -52,6 +54,8 @@ namespace MyApp
         private static Pos GameLoop(FruitController fruitController, SnakeView view, SnakePos snake, Pos currentFruitPos)
         {
             Console.Clear();
+            view.InsertSnakeIntoMap(snake);
+            view.InsertNewFruitIntoMap(currentFruitPos);
             view.DisplayMap();
 
             while (true)
@@ -62,7 +66,7 @@ namespace MyApp
                 if (fruitController.IsEaten(snake, currentFruitPos, dir))
                 {
                     SnakeController.IncreaseLength(snake);
-                    currentFruitPos = fruitController.GenerateRandomFruitPos(view.Map.GetLength(1), view.Map.GetLength(0));
+                    currentFruitPos = fruitController.GenerateRandomFruitPos(snake, view.Map.GetLength(1), view.Map.GetLength(0));
                 }
 
                 if (SnakeController.IsCollided(snake, view))
@@ -96,19 +100,19 @@ namespace MyApp
             snake = new SnakePos()
             {
                 Positions = new List<Pos>
-                        {
-                            new Pos(4, 0),
-                            new Pos(3, 0),
-                            new Pos(2, 0),
-                            new Pos(1, 0),
-                            new Pos(0, 0)
-                        },
+                {
+                    new Pos(0, 0),
+                    new Pos(1, 0),
+                    new Pos(2, 0),
+                    new Pos(3, 0),
+                    new Pos(4, 0),
+                },
 
                 MaxSnakeLength = 5,
             };
-            view.DisplayMap();
 
-            currentFruitPos = fruitController.GenerateRandomFruitPos(view.Map.GetLength(1), view.Map.GetLength(0));
+            view.DisplayMap();
+            currentFruitPos = fruitController.GenerateRandomFruitPos(snake, view.Map.GetLength(1), view.Map.GetLength(0));
         }
     }
 }
