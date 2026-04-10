@@ -25,6 +25,7 @@ namespace MyApp
                         SnakePos snake;
                         Pos currentFruitPos;
 
+                        Console.Clear();
                         Console.WriteLine("A játékhoz - 1");
                         Console.WriteLine("Az eredményekhez - 2");
                         Console.Write("A kilépéshez - 3\n\nKérem válasszon --> ");
@@ -48,6 +49,7 @@ namespace MyApp
                 }
                 catch (IndexOutOfRangeException iorEx)
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
                     Console.WriteLine("Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
@@ -56,7 +58,10 @@ namespace MyApp
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Clear();
+                    Console.WriteLine("Ismeretlen hiba történt!", ex.Message);
+                    Console.WriteLine("\n\nEnterrel tovább! ");
                     Console.ReadLine();
                 }                
             }
@@ -114,8 +119,9 @@ namespace MyApp
                 view.InsertSnakeIntoMap(snake);
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
-                //Console.Clear();
-                view.DisplayMapElements(snake, currentFruitPos, view.Map.GetLength(0) + 2);
+                //view.DisplayMapElements(snake, currentFruitPos, view.Map.GetLength(0) + 2);
+                view.DisplayWholeSnake(snake, currentFruitPos);
+                view.HighlihtSnakeHead(snake);
                 //view.DisplayMap(snake.Positions.Count);
 
                 Thread.Sleep(150);

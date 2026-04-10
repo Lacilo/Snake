@@ -52,11 +52,19 @@ namespace Snake.View
             //Console.WriteLine("\nPontszám: " + score);
         }
 
-        public void DisplayMapElements(SnakePos snake, Pos currentFruitPos, int mapHeight)
+        public void HighlihtSnakeHead(SnakePos snake)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(snake.Positions.Last().X, snake.Positions.Last().Y);
             Console.Write("█");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public void DisplayMapElements(SnakePos snake, Pos currentFruitPos, int mapHeight)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(snake.Positions.Last().X, snake.Positions.Last().Y);
+            Console.Write("▒");
 
             Console.SetCursorPosition(snake.Positions[0].X, snake.Positions[0].Y);
             Console.Write(" ");
@@ -69,6 +77,25 @@ namespace Snake.View
 
             Console.SetCursorPosition(0, mapHeight);
             Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
+        }
+
+        public void DisplayWholeSnake(SnakePos snake, Pos currentFruitPos)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var item in snake.Positions)
+            {
+                Console.SetCursorPosition(item.X, item.Y);
+                Console.Write("▒");
+            }
+
+            Console.SetCursorPosition(snake.Positions[0].X, snake.Positions[0].Y);
+            Console.Write(" ");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(currentFruitPos.X, currentFruitPos.Y);
+            Console.Write("■");
+
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void DisplayMap(int score)
