@@ -9,5 +9,6 @@ namespace Snake.Models
     internal class SnakePos
     {
         public List<Pos> Positions { get; set; }
+        public int MaxSnakeLength { get; set; }
     }
 }

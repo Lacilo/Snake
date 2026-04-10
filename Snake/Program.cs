@@ -1,4 +1,5 @@
-﻿using Snake.Controller;
+﻿using Google.Protobuf.Collections;
+using Snake.Controller;
 using Snake.Models;
 using Snake.View;
 
@@ -9,18 +10,105 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            SnakeView view = new SnakeView();
-            SnakePos snake = new SnakePos()
+            Console.Clear();
+
+            while(true)
             {
-                Positions = new List<Pos> { new Pos(0, 0), new Pos(1, 0), new Pos(2, 0), new Pos(3, 0), new Pos(4, 0) }
+                try
+                {
+                    FruitController fruitController;
+                    SnakeView view;
+                    SnakePos snake;
+                    Pos currentFruitPos;
+
+                    Console.WriteLine("A játékhoz - 1");
+                    Console.WriteLine("Az eredményekhez - 2");
+                    Console.WriteLine("A kilépéshez - 3");
+                    string valasztas = Console.ReadLine();
+
+                    if (valasztas == "1") 
+                    {
+                        Console.Clear();
+                        InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
+                        currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
+                    }
+                }
+                catch (IndexOutOfRangeException iorEx)
+                {
+                    Console.WriteLine(iorEx);
+                    Console.Clear();
+                    Console.WriteLine("Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
+                    Console.ReadLine();
+                    Main(null);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    Console.ReadLine();
+                }                
+            }
+        }
+
+        private static Pos GameLoop(FruitController fruitController, SnakeView view, SnakePos snake, Pos currentFruitPos)
+        {
+            Console.Clear();
+            view.DisplayMap();
+
+            while (true)
+            {
+                char dir = Console.ReadKey().KeyChar;
+                SnakeController.AppendSnake(snake, dir, currentFruitPos);
+
+                if (fruitController.IsEaten(snake, currentFruitPos, dir))
+                {
+                    SnakeController.IncreaseLength(snake);
+                    currentFruitPos = fruitController.GenerateRandomFruitPos(view.Map.GetLength(1), view.Map.GetLength(0));
+                }
+
+                if (SnakeController.IsCollided(snake, view))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
+                    Console.ReadLine();
+                    Main(null);
+                    break;
+                }
+
+                view.InsertSnakeIntoMap(snake);
+                view.InsertNewFruitIntoMap(currentFruitPos);
+
+                Console.Clear();
+                view.DisplayMap();
+            }
+
+            return currentFruitPos;
+        }
+
+        private static void InitializeGame(out FruitController fruitController, out SnakeView view, out SnakePos snake, out Pos currentFruitPos)
+        {
+            Console.Write("Adja meg a játéktér szélességét és magasságát ebben a formátumban (szél,mag) (pl.: 100,50) --> ");
+            string inp = Console.ReadLine();
+            string[] inpSplit = inp.Split(',');
+
+
+            fruitController = new FruitController();
+            view = new SnakeView(new int[int.Parse(inpSplit[1]), int.Parse(inpSplit[0])]);
+            snake = new SnakePos()
+            {
+                Positions = new List<Pos>
+                        {
+                            new Pos(4, 0),
+                            new Pos(3, 0),
+                            new Pos(2, 0),
+                            new Pos(1, 0),
+                            new Pos(0, 0)
+                        },
+
+                MaxSnakeLength = 5,
             };
-
-            view.InsertSnakeIntoMap(snake);
             view.DisplayMap();
 
-            SnakeController.AppendSnake(snake, 's');
-            view.InsertSnakeIntoMap(snake);
-            view.DisplayMap();
+            currentFruitPos = fruitController.GenerateRandomFruitPos(view.Map.GetLength(1), view.Map.GetLength(0));
         }
     }
 }

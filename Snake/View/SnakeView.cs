@@ -17,15 +17,15 @@ namespace Snake.View
             Map = map;
         }
 
-        public int[,] Map = new int[20, 20];
+        public int[,] Map;
 
         public void DisplayMap()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Map.GetLength(0); i++)
             {
-                for (int j = 0; j < 20; j++)
+                for (int j = 0; j < Map.GetLength(1); j++)
                 {
-                    Console.Write(Map[i, j] + " | ");
+                    Console.Write(Map[i, j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -33,10 +33,17 @@ namespace Snake.View
 
         public void InsertSnakeIntoMap(SnakePos sPos)
         {
+            Map = new int[Map.GetLength(0), Map.GetLength(1)];
+
             foreach (var item in sPos.Positions)
             {
                 Map[item.Y, item.X] = 1;
             }
         }
+
+        public void InsertNewFruitIntoMap(Pos fPos)
+        {
+            if(fPos.X > -1) Map[fPos.Y, fPos.X] = 2;
+        }   
     }
 }
