@@ -129,9 +129,6 @@ namespace MyApp
             string inp = Console.ReadLine();
             string[] inpSplit = inp.Split(',');
 
-            //Console.SetWindowSize(int.Parse(inpSplit[1]), int.Parse(inpSplit[0]));
-            //Console.SetBufferSize(int.Parse(inpSplit[1]), int.Parse(inpSplit[0]));
-
             fruitController = new FruitController();
             view = new SnakeView(new int[int.Parse(inpSplit[1]), int.Parse(inpSplit[0])]);
             snake = new SnakePos()
