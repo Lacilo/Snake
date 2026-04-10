@@ -67,7 +67,7 @@ namespace MyApp
             Console.Clear();
             view.InsertSnakeIntoMap(snake);
             view.InsertNewFruitIntoMap(currentFruitPos);
-            view.DisplayMap();
+            view.DisplayMap(snake.Positions.Count);
 
             char dir = 'd';
 
@@ -115,7 +115,7 @@ namespace MyApp
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
                 Console.Clear();
-                view.DisplayMap();
+                view.DisplayMap(snake.Positions.Count);
 
                 Thread.Sleep(150);
             }
@@ -145,7 +145,7 @@ namespace MyApp
                 MaxSnakeLength = 5,
             };
 
-            view.DisplayMap();
+            view.DisplayMap(snake.Positions.Count);
             currentFruitPos = fruitController.GenerateRandomFruitPos(snake, view.Map.GetLength(1), view.Map.GetLength(0));
         }
     }

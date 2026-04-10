@@ -20,7 +20,7 @@ namespace Snake.View
 
         public int[,] Map;
 
-        public void DisplayMap()
+        public void DisplayMap(int score)
         {
             for (int i = 0; i < Map.GetLength(0); i++)
             {
@@ -28,11 +28,15 @@ namespace Snake.View
                 {
                     if (Map[i, j] == 1)
                     {
-                        Console.Write(Map[i, j]);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("█");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else if (Map[i, j] == 2)
                     {
-                        Console.Write(Map[i, j]);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("█");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else if(Map[i, j] == 0)
                     {
@@ -41,6 +45,7 @@ namespace Snake.View
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine("Pontszám: " + score);
         }
 
         public void InsertSnakeIntoMap(SnakePos sPos)
