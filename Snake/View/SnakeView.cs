@@ -52,7 +52,7 @@ namespace Snake.View
             //Console.WriteLine("\nPontszám: " + score);
         }
 
-        public void HighlihtSnakeHead(SnakePos snake, ConsoleColor color = ConsoleColor.Green)
+        public void HighlightSnakeHead(SnakePos snake, ConsoleColor color = ConsoleColor.Green)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(snake.Positions.Last().X, snake.Positions.Last().Y);

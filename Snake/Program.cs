@@ -12,6 +12,7 @@ namespace MyApp
 
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             Console.Clear();
 
             while(true)
@@ -121,8 +122,7 @@ namespace MyApp
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
                 view.DisplayWholeSnake(snake, currentFruitPos, view.Map.GetLength(0) + 2);
-                view.HighlihtSnakeHead(snake);
-
+                view.HighlightSnakeHead(snake);
                 
                 //view.DisplayMap(snake.Positions.Count);
 
