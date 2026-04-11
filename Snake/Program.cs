@@ -101,6 +101,7 @@ namespace MyApp
                     }
                 }
 
+                //
                 SnakeController.AppendSnake(snake, dir, currentFruitPos);
 
                 if (fruitController.IsEaten(snake, currentFruitPos, dir))
