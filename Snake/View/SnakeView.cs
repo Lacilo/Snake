@@ -84,12 +84,21 @@ namespace Snake.View
             Console.ForegroundColor = ConsoleColor.Green;
             foreach (var item in snake.Positions)
             {
-                Console.SetCursorPosition(item.X, item.Y);
-                Console.Write("▒");
-            }
+                if (item == snake.Positions.Last()) 
+                {
+                    Console.SetCursorPosition(item.X, item.Y);
+                    Console.Write("█");
+                }
+                else 
+                {
+                    Console.SetCursorPosition(snake.Positions[0].X, snake.Positions[0].Y);
+                    Console.Write(" ");
 
-            Console.SetCursorPosition(snake.Positions[0].X, snake.Positions[0].Y);
-            Console.Write(" ");
+                    Console.SetCursorPosition(item.X, item.Y);
+                    Console.Write("▒");
+                }
+                
+            }
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(currentFruitPos.X, currentFruitPos.Y);
