@@ -97,7 +97,6 @@ namespace Snake.View
                     Console.SetCursorPosition(item.X, item.Y);
                     Console.Write("▒");
                 }
-                
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
