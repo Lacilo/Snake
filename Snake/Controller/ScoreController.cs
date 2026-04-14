@@ -84,6 +84,42 @@ namespace Snake.Controller
             }
         }
 
-        
+        public bool ScoreUpdate(string PlayerName, int PlayerScore)
+        {
+            string connectionString = "SERVER=localhost;DATABASE=snake;UID=root;PASSWORD=;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string selectSql = "SELECT Score FROM high_score WHERE Name = @Name";
+
+                using (MySqlCommand selectCmd = new MySqlCommand(selectSql, connection))
+                {
+                    selectCmd.Parameters.AddWithValue("@Name", PlayerName);
+
+                    object result = selectCmd.ExecuteScalar();
+
+                    int oldScore = result == null ? 0 : Convert.ToInt32(result);
+
+                    if (PlayerScore > oldScore)
+                    {
+                        string updateSql = "UPDATE high_score SET Score = @Score WHERE Name = @Name";
+
+                        using (MySqlCommand updateCmd = new MySqlCommand(updateSql, connection))
+                        {
+                            updateCmd.Parameters.AddWithValue("@Score", PlayerScore);
+                            updateCmd.Parameters.AddWithValue("@Name", PlayerName);
+
+                            updateCmd.ExecuteNonQuery();
+                        }
+
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+        }
     }
 }
