@@ -17,6 +17,10 @@ namespace Snake.Controller
             {
                 return true;
             }
+            else if (snake.Positions[0].X < 0 || snake.Positions[0].X >= view.Map.GetLength(1) || snake.Positions[0].Y < 0 || snake.Positions[0].Y >= view.Map.GetLength(0))
+            {
+                return true;
+            }
 
             return false;
         }
@@ -43,8 +47,6 @@ namespace Snake.Controller
                     break;
 
                 case 's':
-                    if(snake.Positions.Last().X == currentFruitPos.X && snake.Positions.Last().Y + 1 == currentFruitPos.Y) snake.MaxSnakeLength++;
-
                     snake.Positions.Add(new Pos(snake.Positions.Last().X, snake.Positions.Last().Y + 1));
                     //Console.WriteLine("Hosszabbítottam a kígyót - s");
                     //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
@@ -52,8 +54,6 @@ namespace Snake.Controller
                     break;
 
                 case 'a':
-                    if (snake.Positions.Last().X == currentFruitPos.X - 1 && snake.Positions.Last().Y == currentFruitPos.Y) snake.MaxSnakeLength++;
-
                     snake.Positions.Add(new Pos(snake.Positions.Last().X - 1, snake.Positions.Last().Y));
                     //Console.WriteLine("Hosszabbítottam a kígyót - a");
                     //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));
@@ -61,8 +61,6 @@ namespace Snake.Controller
                     break;
 
                 case 'd':
-                    if (snake.Positions.Last().X == currentFruitPos.X + 1 && snake.Positions.Last().Y == currentFruitPos.Y) snake.MaxSnakeLength++;
-
                     snake.Positions.Add(new Pos(snake.Positions.Last().X + 1, snake.Positions.Last().Y));
                     //Console.WriteLine("Hosszabbítottam a kígyót - d");
                     //snake.Positions.ForEach(x => Console.WriteLine(x.X + " " + x.Y));

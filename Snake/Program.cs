@@ -28,21 +28,43 @@ namespace MyApp
                         
 
                         Console.Clear();
+                        Console.WriteLine($"Bejelentkezve mint {currentUser.UserName}\n");
                         Console.WriteLine("A játékhoz - 1");
                         Console.WriteLine("Az eredményekhez - 2");
-                        Console.Write("A kilépéshez - 3\n\nKérem válasszon --> ");
+                        Console.Write("A kijelentkezéshez - 3\n\nKérem válasszon --> ");
                         string valasztas = Console.ReadLine();
 
-                            if (valasztas == "1")
-                            {
-                                Console.Clear();
-                                InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
-                                currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
-                            }
+                        if (valasztas == "1")
+                        {
+                            Console.Clear();
+                            InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
+                            currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
+                        }
+                        else if (valasztas == "2")
+                        {
+                            Console.Clear();
+
+                            Console.WriteLine($"Saját rekord - {new ScoreController().GetPlayerScore(currentUser.UserName).PlayerScore}p");
+
+                            // Többi felhasználó eredményeinek megjleneítése
+
+                            // Várakozás bevitelre a főmenüre való visszatéréshez
+                            Console.Write("\nEnterrel tovább");
+                            Console.ReadLine();
+                        }
+                        else if (valasztas == "3")
+                        {
+                            currentUser = null;
+                        }
+                        else
+                        {
+
+                        }
                     }
                     else
                     {
                         // Bejelentkezés/regisztráció
+                        Console.Clear();
                         Console.WriteLine("Bejelentkezés - 1 ");
                         Console.WriteLine("Regisztráció - 2");
                         Console.WriteLine("Kilépés - 3");
@@ -68,8 +90,21 @@ namespace MyApp
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
-                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
-                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
+                    
+                    int score;
+
+                    if (snake.MaxSnakeLength - 5 < 0) 
+                    { 
+                        score = 0; 
+                    } 
+                    else
+                    {
+                        score = snake.MaxSnakeLength - 5;
+                    }
+
+                    Console.WriteLine($"Game Over vagy váratlan hiba történt! Eredmények elmentve ({score}). Nyomjon entert a főmenübe való visszalépéshez!");
+
+                    new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                 }
@@ -128,8 +163,8 @@ namespace MyApp
                 if (SnakeController.IsCollided(snake, view))
                 {
                     Console.Clear();
-                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
-                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
+                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.MaxSnakeLength - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
+                    new ScoreController().ScoreToDatabase(snake.MaxSnakeLength - 5, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                     break;
