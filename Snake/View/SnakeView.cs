@@ -92,6 +92,7 @@ namespace Snake.View
 
         public void DisplayMap(int score)
         {
+            Console.Write(" ");
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 Console.Write('-');
@@ -109,6 +110,7 @@ namespace Snake.View
                 Console.Write("|\n");
             }
 
+            Console.Write(" ");
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 Console.Write('-');
