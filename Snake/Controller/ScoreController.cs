@@ -23,9 +23,9 @@ namespace Snake.Controller
                 insertcmd.Parameters.AddWithValue("@ScoreDate", ScoreDate);
 
 
-                int sorok = insertcmd.ExecuteNonQuery();
-                bool valasz = sorok > 0 ? true : false;
-                return valasz;
+                int rows = insertcmd.ExecuteNonQuery();
+                bool answer = rows > 0 ? true : false;
+                return answer;
             }
             catch (Exception ex)
             {
@@ -62,6 +62,28 @@ namespace Snake.Controller
                 return null;
             }
         }
+
+        public bool ScoreUpdateOrInsert(string PlayerName)
+        {
+            string connectionString = "SERVER=localhost;DATABASE=snake;UID=root;PASSWORD=;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string sql = @" SELECT EXISTS(SELECT 1 FROM high_score WHERE Name = @Name);";
+
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", PlayerName);
+
+                    object result = command.ExecuteScalar();
+
+                    return Convert.ToBoolean(result);
+                }
+            }
+        }
+
+        
     }
 }
-
