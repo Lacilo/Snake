@@ -90,7 +90,7 @@ namespace MyApp
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
-                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
+                    Console.WriteLine($"Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
                     new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
