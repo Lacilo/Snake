@@ -11,14 +11,16 @@ namespace Snake.Models
         
         public Score(){ }
 
-        public Score(int id, int playerScore, DateTime scoreDate)
+        public Score(int id, string playerName ,int playerScore, DateTime scoreDate)
         {
             Id = id;
+            PlayerName = playerName;
             PlayerScore = playerScore;
             ScoreDate = scoreDate;
         }
 
         public int Id { get; set; }
+        public string PlayerName { get; set; }
         public int PlayerScore { get; set; }
         public DateTime ScoreDate { get; set; }
     }

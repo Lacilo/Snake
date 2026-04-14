@@ -14,7 +14,7 @@ namespace MyApp
         {
             Console.CursorVisible = false;
             Console.Clear();
-
+                                
             while(true)
             {
                 try
