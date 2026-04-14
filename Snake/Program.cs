@@ -47,6 +47,7 @@ namespace MyApp
                             Console.WriteLine($"Saját rekord - {new ScoreController().GetPlayerScore(currentUser.UserName).PlayerScore}p");
 
                             // Többi felhasználó eredményeinek megjleneítése
+                            new ScoreController().ScoreBoard().ForEach(score => Console.WriteLine(score));
 
                             // Várakozás bevitelre a főmenüre való visszatéréshez
                             Console.Write("\nEnterrel tovább");
