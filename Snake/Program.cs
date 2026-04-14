@@ -90,18 +90,21 @@ namespace MyApp
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
-                    Console.WriteLine($"Game Over vagy váratlan hiba történt! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
+                    
+                    int score;
 
-                    if(snake.Positions.Count - 5 < 0) 
+                    if (snake.MaxSnakeLength - 5 < 0) 
                     { 
-                        int score = 0; 
+                        score = 0; 
                     } 
                     else
                     {
-                        int score = snake.Positions.Count - 5;
+                        score = snake.MaxSnakeLength - 5;
                     }
 
-                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
+                    Console.WriteLine($"Game Over vagy váratlan hiba történt! Eredmények elmentve ({score}). Nyomjon entert a főmenübe való visszalépéshez!");
+
+                    new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                 }
@@ -160,8 +163,8 @@ namespace MyApp
                 if (SnakeController.IsCollided(snake, view))
                 {
                     Console.Clear();
-                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
-                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
+                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.MaxSnakeLength - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
+                    new ScoreController().ScoreToDatabase(snake.MaxSnakeLength - 5, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                     break;
