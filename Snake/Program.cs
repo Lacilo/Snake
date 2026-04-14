@@ -9,6 +9,7 @@ namespace MyApp
     internal class Program
     {
         static Login currentUser;
+        static SnakePos snake;
 
         static void Main(string[] args)
         {
@@ -19,11 +20,10 @@ namespace MyApp
             {
                 try
                 {
-                    if(!(currentUser != null))
+                    if(currentUser != null)
                     {
                         FruitController fruitController;
                         SnakeView view;
-                        SnakePos snake;
                         Pos currentFruitPos;
                         
 
@@ -45,8 +45,22 @@ namespace MyApp
                         // Bejelentkezés/regisztráció
                         Console.WriteLine("Bejelentkezés - 1 ");
                         Console.WriteLine("Regisztráció - 2");
+                        Console.WriteLine("Kilépés - 3");
 
-                        Console.ReadLine();
+                        string choice = Console.ReadLine();
+
+                        if (choice == "1") 
+                        {
+                            currentUser = LoginView.BejelentkezesView();
+                        }
+                        else if(choice == "2")
+                        {
+                            LoginView.RegistrationView();
+                        }
+                        else if(choice == "3")
+                        {
+                            Environment.Exit(0);
+                        }
                     }
                 }
                 catch (IndexOutOfRangeException iorEx)
@@ -54,7 +68,8 @@ namespace MyApp
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
-                    Console.WriteLine("Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
+                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
+                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                 }
@@ -113,7 +128,8 @@ namespace MyApp
                 if (SnakeController.IsCollided(snake, view))
                 {
                     Console.Clear();
-                    Console.WriteLine("Game Over! Eredmények elmentve. Nyomjon entert a főmenübe való visszalépéshez!");
+                    Console.WriteLine($"Game Over! Eredmények elmentve ({snake.Positions.Count - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
+                    new ScoreController().ScoreToDatabase(snake.Positions.Count - 5, currentUser.UserName, DateTime.Now);
                     Console.ReadLine();
                     Main(null);
                     break;

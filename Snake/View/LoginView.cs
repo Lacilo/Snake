@@ -1,10 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using Snake.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Snake.Controller;
+using Snake.Models;
 
 namespace Snake.View
 {
@@ -38,32 +33,33 @@ namespace Snake.View
             }
         }
 
-        public static void BejelentkezesView()
+        public static Login BejelentkezesView()
         {
             bool b = true;
-            while (b)
+            Console.Clear();
+            Console.WriteLine("=== BEJELENTKEZÉS ===");
+
+            Console.WriteLine("Felhasználónév: ");
+            string userName = Console.ReadLine();
+
+            Console.WriteLine("Jelszó: ");
+            string password = Console.ReadLine();
+
+            bool sucLogin = new UserController().IsLoginTrueOrFalse(userName, password);
+            if (sucLogin)
             {
-                Console.Clear();
-                Console.WriteLine("=== BEJELENTKEZÉS ===");
+                Console.WriteLine("Sikeres bejelentkezés!");
+                Console.ReadLine();
+                b = false;
 
-                Console.WriteLine("Felhasználónév: ");
-                string userName = Console.ReadLine();
+                return new Login(userName, password);
+            }
+            else
+            {
+                Console.WriteLine("Hibás felhasználónév vagy jelszó!");
+                Console.ReadLine();
 
-                Console.WriteLine("Jelszó: ");
-                string password = Console.ReadLine();
-
-                bool sucLogin = new UserController().IsLoginTrueOrFalse(userName, password);
-                if (sucLogin)
-                {
-                    Console.WriteLine("Sikeres bejelentkezés!");
-                    Console.ReadLine();
-                    b = false;
-                }
-                else
-                {
-                    Console.WriteLine("Hibás felhasználónév vagy jelszó!");
-                    Console.ReadLine();
-                }
+                return null;
             }
         }
     }
