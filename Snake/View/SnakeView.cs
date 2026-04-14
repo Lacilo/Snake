@@ -79,7 +79,7 @@ namespace Snake.View
             Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
         }
 
-        public void DisplayWholeSnake(SnakePos snake, Pos currentFruitPos, int mapHeight)
+        public void DisplayWholeSnake(SnakePos snake, Pos currentFruitPos, int mapHeight, int userRecord)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             foreach (var item in snake.Positions)
@@ -106,7 +106,7 @@ namespace Snake.View
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.SetCursorPosition(0, mapHeight);
-            Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5));
+            Console.Write("Pontszám: " + (snake.MaxSnakeLength - 5) + $" | Előző Rekord: {userRecord}");
         }
 
         public void DisplayMap(int score)

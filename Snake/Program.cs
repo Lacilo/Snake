@@ -122,13 +122,18 @@ namespace MyApp
                 view.InsertSnakeIntoMap(snake);
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
-                view.DisplayWholeSnake(snake, currentFruitPos, view.Map.GetLength(0) + 2);
+                view.DisplayWholeSnake(snake, currentFruitPos, view.Map.GetLength(0) + 2, 0);
 
                 //view.DisplayMap(snake.Positions.Count);
 
                 Thread.Sleep(150);
             }
 
+            if (snake.MaxSnakeLength > view.Map.GetLength(0) * view.Map.GetLength(1))
+            {
+                Console.WriteLine("Gratulálok! Megnyerted a játékot!");
+                // Eredmények elmentése
+            }
             return currentFruitPos;
         }
 
