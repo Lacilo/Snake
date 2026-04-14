@@ -34,7 +34,34 @@ namespace Snake.Controller
             }
         }
 
-        
+        public Score GetPlayerScore(string PlayerName)
+        {
+            MySqlConnection connection = new MySqlConnection();
+            string connectionString = "SERVER =localhost;DATABASE=snake;UID=root;PASSWORD=;";
+            connection.ConnectionString = connectionString;
+            try
+            {
+                connection.Open();
+                string sql = "SELECT Score FROM high_score WHERE Name = @Name";
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@Name", PlayerName);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Score()
+                    {
+                        PlayerScore = reader.GetInt32("Score"),
+                    };
+                }
+                connection.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hiba történt: " + ex.Message);
+                return null;
+            }
+        }
     }
 }
 
