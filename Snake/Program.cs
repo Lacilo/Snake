@@ -28,21 +28,43 @@ namespace MyApp
                         
 
                         Console.Clear();
+                        Console.WriteLine($"Bejelentkezve mint {currentUser.UserName}\n");
                         Console.WriteLine("A játékhoz - 1");
                         Console.WriteLine("Az eredményekhez - 2");
-                        Console.Write("A kilépéshez - 3\n\nKérem válasszon --> ");
+                        Console.Write("A kijelentkezéshez - 3\n\nKérem válasszon --> ");
                         string valasztas = Console.ReadLine();
 
-                            if (valasztas == "1")
-                            {
-                                Console.Clear();
-                                InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
-                                currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
-                            }
+                        if (valasztas == "1")
+                        {
+                            Console.Clear();
+                            InitializeGame(out fruitController, out view, out snake, out currentFruitPos);
+                            currentFruitPos = GameLoop(fruitController, view, snake, currentFruitPos);
+                        }
+                        else if (valasztas == "2")
+                        {
+                            Console.Clear();
+
+                            Console.WriteLine($"Saját rekord - {new ScoreController().GetPlayerScore(currentUser.UserName).PlayerScore}p");
+
+                            // Többi felhasználó eredményeinek megjleneítése
+
+                            // Várakozás bevitelre a főmenüre való visszatéréshez
+                            Console.Write("\nEnterrel tovább");
+                            Console.ReadLine();
+                        }
+                        else if (valasztas == "3")
+                        {
+                            currentUser = null;
+                        }
+                        else
+                        {
+
+                        }
                     }
                     else
                     {
                         // Bejelentkezés/regisztráció
+                        Console.Clear();
                         Console.WriteLine("Bejelentkezés - 1 ");
                         Console.WriteLine("Regisztráció - 2");
                         Console.WriteLine("Kilépés - 3");
