@@ -121,5 +121,40 @@ namespace Snake.Controller
                 }
             }
         }
+
+        public List<string> ScoreBoard()
+        {
+            List<string> scoreBoard = new List<string>();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(
+                    "server=localhost;user=root;password=;database=snake;"))
+                {
+                    conn.Open();
+
+                    string query = "SELECT Name, Score FROM high_score ORDER BY Score DESC";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string name = reader.GetString(0);
+                            int score = reader.GetInt32(1);
+
+                            scoreBoard.Add($"{name} - {score} pont");
+                        }
+                    }
+                }
+
+                return scoreBoard;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<string>();
+            }
+        }
     }
 }
