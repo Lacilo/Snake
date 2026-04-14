@@ -23,12 +23,16 @@ namespace Snake.View
                 {
                     new UserController().NewRegistration(felhNev, jelszo);
                     Console.WriteLine("Sikeres regisztráció!");
-                    Console.ReadLine();
+                    Console.WriteLine("Nyomjon egy gombot a továbblépéshez!");
+                    Console.ReadKey();
                     b = false;
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine("Valamilyen hiba történt!");
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine("Nyomjon egy gombot a továbblépéshez!");
+                    Console.ReadKey();
                 }
             }
         }
@@ -49,7 +53,8 @@ namespace Snake.View
             if (sucLogin)
             {
                 Console.WriteLine("Sikeres bejelentkezés!");
-                Console.ReadLine();
+                Console.WriteLine("Nyomjon egy gombot a továbblépéshez!");
+                Console.ReadKey();
                 b = false;
 
                 return new Login(userName, password);
@@ -57,7 +62,8 @@ namespace Snake.View
             else
             {
                 Console.WriteLine("Hibás felhasználónév vagy jelszó!");
-                Console.ReadLine();
+                Console.WriteLine("Nyomjon egy gombot a továbblépéshez!");
+                Console.ReadKey();
 
                 return null;
             }

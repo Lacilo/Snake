@@ -16,7 +16,7 @@ namespace Snake.Controller
             {
                 MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=;database=snake;");
                 con.Open();
-                string insertSql = @"INSERT INTO high_score VALUES (@Name,@Score,@ScoreDate)";
+                string insertSql = @"INSERT INTO high_score (Name, Score, ScoreDate) VALUES (@Name,@Score,@ScoreDate)";
                 MySqlCommand insertcmd = new MySqlCommand(insertSql, con);
                 insertcmd.Parameters.AddWithValue("@Name", PlayerName);
                 insertcmd.Parameters.AddWithValue("@Score", score);
