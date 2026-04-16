@@ -84,7 +84,7 @@ namespace Snake.Controller
             }
         }
 
-        public bool ScoreUpdate(string PlayerName, int PlayerScore)
+        public bool ScoreUpdate(string PlayerName, int PlayerScore, DateTime ScoreDate)
         {
             string connectionString = "SERVER=localhost;DATABASE=snake;UID=root;PASSWORD=;";
 
@@ -104,12 +104,13 @@ namespace Snake.Controller
 
                     if (PlayerScore > oldScore)
                     {
-                        string updateSql = "UPDATE high_score SET Score = @Score WHERE Name = @Name";
+                        string updateSql = "UPDATE high_score SET Score = @Score, ScoreDate = @ScoreDate WHERE Name = @Name";
 
                         using (MySqlCommand updateCmd = new MySqlCommand(updateSql, connection))
                         {
                             updateCmd.Parameters.AddWithValue("@Score", PlayerScore);
                             updateCmd.Parameters.AddWithValue("@Name", PlayerName);
+                            updateCmd.Parameters.AddWithValue("@ScoreDate", ScoreDate);
 
                             updateCmd.ExecuteNonQuery();
                         }

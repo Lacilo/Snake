@@ -20,12 +20,12 @@ namespace MyApp
             {
                 try
                 {
-                    if(currentUser != null)
+                    if (currentUser != null)
                     {
                         FruitController fruitController;
                         SnakeView view;
                         Pos currentFruitPos;
-                        
+
 
                         Console.Clear();
                         Console.WriteLine($"Bejelentkezve mint {currentUser.UserName}\n");
@@ -47,6 +47,7 @@ namespace MyApp
                             Console.WriteLine($"Saját rekord - {new ScoreController().GetPlayerScore(currentUser.UserName).PlayerScore}p");
 
                             // Többi felhasználó eredményeinek megjleneítése
+                            Console.WriteLine("\nScoreboard\n");
                             new ScoreController().ScoreBoard().ForEach(score => Console.WriteLine(score));
 
                             // Várakozás bevitelre a főmenüre való visszatéréshez
@@ -72,15 +73,15 @@ namespace MyApp
 
                         string choice = Console.ReadLine();
 
-                        if (choice == "1") 
+                        if (choice == "1")
                         {
                             currentUser = LoginView.BejelentkezesView();
                         }
-                        else if(choice == "2")
+                        else if (choice == "2")
                         {
                             LoginView.RegistrationView();
                         }
-                        else if(choice == "3")
+                        else if (choice == "3")
                         {
                             Environment.Exit(0);
                         }
@@ -91,21 +92,29 @@ namespace MyApp
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(iorEx);
                     Console.Clear();
-                    
+
                     int score;
 
-                    if (snake.MaxSnakeLength - 5 < 0) 
-                    { 
-                        score = 0; 
-                    } 
+                    if (snake.MaxSnakeLength - 5 < 0)
+                    {
+                        score = 0;
+                    }
                     else
                     {
                         score = snake.MaxSnakeLength - 5;
                     }
 
                     Console.WriteLine($"Game Over vagy váratlan hiba történt! Eredmények elmentve ({score}). Nyomjon entert a főmenübe való visszalépéshez!");
-
-                    new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
+                    bool scoreUpdateOrInsert = new ScoreController().ScoreUpdateOrInsert(currentUser.UserName);
+                    if (scoreUpdateOrInsert)
+                    {
+                        new ScoreController().ScoreUpdate(currentUser.UserName,score, DateTime.Now);
+                    }
+                    else
+                    {
+                        new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
+                    }
+                    
                     Console.ReadLine();
                     Main(null);
                 }
@@ -165,7 +174,26 @@ namespace MyApp
                 {
                     Console.Clear();
                     Console.WriteLine($"Game Over! Eredmények elmentve ({snake.MaxSnakeLength - 5}). Nyomjon entert a főmenübe való visszalépéshez!");
-                    new ScoreController().ScoreToDatabase(snake.MaxSnakeLength - 5, currentUser.UserName, DateTime.Now);
+                    int score;
+
+                    if (snake.MaxSnakeLength - 5 < 0)
+                    {
+                        score = 0;
+                    }
+                    else
+                    {
+                        score = snake.MaxSnakeLength - 5;
+                    }
+
+                    bool scoreUpdateOrInsert = new ScoreController().ScoreUpdateOrInsert(currentUser.UserName);
+                    if (scoreUpdateOrInsert)
+                    {
+                        new ScoreController().ScoreUpdate(currentUser.UserName, score, DateTime.Now);
+                    }
+                    else
+                    {
+                        new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
+                    }
                     Console.ReadLine();
                     Main(null);
                     break;
@@ -185,6 +213,26 @@ namespace MyApp
             {
                 Console.WriteLine("Gratulálok! Megnyerte a játékot!");
                 // Eredmények elmentése
+                int score;
+
+                if (snake.MaxSnakeLength - 5 < 0)
+                {
+                    score = 0;
+                }
+                else
+                {
+                    score = snake.MaxSnakeLength - 5;
+                }
+
+                bool scoreUpdateOrInsert = new ScoreController().ScoreUpdateOrInsert(currentUser.UserName);
+                if (scoreUpdateOrInsert)
+                {
+                    new ScoreController().ScoreUpdate(currentUser.UserName, score, DateTime.Now);
+                }
+                else
+                {
+                    new ScoreController().ScoreToDatabase(score, currentUser.UserName, DateTime.Now);
+                }
             }
             return currentFruitPos;
         }
