@@ -54,12 +54,17 @@ namespace Snake.Controller
                     };
                 }
                 connection.Close();
-                return null;
+                return new Score() { 
+                    PlayerScore = 0,
+                };
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Hiba történt: " + ex.Message);
-                return null;
+                return new Score()
+                {
+                    PlayerScore = 0,
+                };
             }
         }
 

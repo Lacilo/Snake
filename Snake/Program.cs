@@ -138,6 +138,8 @@ namespace MyApp
 
             char dir = 'd';
 
+            int highScore = new ScoreController().GetPlayerScore(currentUser.UserName).PlayerScore;
+
             while (true)
             {      
                 if (Console.KeyAvailable)
@@ -202,7 +204,7 @@ namespace MyApp
                 view.InsertSnakeIntoMap(snake);
                 view.InsertNewFruitIntoMap(currentFruitPos);
 
-                view.DisplayMapElemets(snake, currentFruitPos, view.Map.GetLength(0) + 2, 0);
+                view.DisplayMapElemets(snake, currentFruitPos, view.Map.GetLength(0) + 2, highScore);
 
                 //view.DisplayMap(snake.Positions.Count);
 
